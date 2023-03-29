@@ -13,41 +13,38 @@ const MENU_LIST = [
 ];
 
 export default function NavBar() {
-  const [navActive, setNavActive] = useState(true);
   const [activeIdx, setActiveIdx] = useState(-1);
 
   return (
-    <div className=" m-0 p-0 outline-none box-border">
-      <header className=" sticky z-30 top-0">
-        <nav className="flex p-4 justify-between items-center bg-green-500">
-          <Link href={"/"}>
-            <div className=" decoration-inherit">
-              <h1 className=" text-3xl ">{String(navActive)}</h1>
-            </div>
-          </Link>
+    <nav className=" flex items-center justify-between flex-wrap bg-teal-500 p-6 ">
+      <Link href={"/"}>
+        <div className=" flex items-center flex-shrink-0 text-white mr-6">
+          <h1 className=" font-semibold text-xl tracking-tight">Sate Of MACCHA
+          </h1>
+        </div>
+      </Link>
+      <div className="block lg:hidden">
+        <button className=" flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+          <div className=" fill-current h-3 w-3 "></div>
+          <div className=" fill-current h-3 w-3 "></div>
+          <div className=" fill-current h-3 w-3 "></div>
+        </button>
+      </div>
+      <div
+        className=" w-full block flex-grow lg:flex lg:items-center lg:w-auto"
+      >
+        {MENU_LIST.map((menu, idx) => (
           <div
-            onClick={() => setNavActive(!navActive)}
-            className=" flex flex-col gap-y-1.5 cursor-pointer "
+          className="text-sm lg:flex-grow"
+            onClick={() => {
+              setActiveIdx(idx);
+            }}
+            key={menu.text}
           >
-            <div className=" w-8 h-0.5 bg-black rounded-sm "></div>
-            <div className=" w-8 h-0.5 bg-black rounded-sm "></div>
-            <div className=" w-8 h-0.5 bg-black rounded-sm "></div>
+            <NavItem active={activeIdx === idx} {...menu} />
           </div>
-          <div className="flex flex-col fixed top-16 w-72 gap-y-6 -right-72 pr-6 pl-4 transition-all duration-200 min-h-[100vh - 60px] bg-green-800 active:right-0">
-            {MENU_LIST.map((menu, idx) => (
-              <div
-                onClick={() => {
-                  setActiveIdx(idx);
-                  setNavActive(true);
-                }}
-                key={menu.text}
-              >
-                <NavItem active={activeIdx === idx} {...menu} />
-              </div>
-            ))}
-          </div>
-        </nav>
-      </header>
-    </div>
+        ))}
+      </div>
+    </nav>
   );
 }
