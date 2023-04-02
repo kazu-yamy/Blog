@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { NavItem } from "./NavItem";
 
 const MENU_LIST = [
@@ -13,7 +13,7 @@ const MENU_LIST = [
 ];
 
 export default function NavBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useRef(false);
   const [activeIdx, setActiveIdx] = useState(-1);
 
   return (
@@ -26,11 +26,15 @@ export default function NavBar() {
         </div>
       </Link>
       <div className="block lg:hidden">
-        <button className=" flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
-          <div className=" fill-current h-3 w-9 font-semibold ">Menu</div>
+        <button
+          onClick={() => isOpen.current = !isOpen.current}
+          className=" flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+          type="button"
+        >
+          <div className=" fill-current font-semibold ">${String(isOpen.current)}</div>
         </button>
       </div>
-      <div className=" hidden w-full md:block flex-grow lg:flex lg:items-center lg:w-auto lg:text-center ">
+      <div className={" w-full flex-grow lg:flex lg:items-center lg:w-auto lg:text-center &{isOpen ? 'hidden' : 'block'} "}>
         {MENU_LIST.map((menu, idx) => (
           <div
             className="text-sm lg:flex-grow"
