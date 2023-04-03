@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState, useRef } from "react";
-import { NavItem } from "./NavItem";
+import React, { useState } from "react";
+import NavItem from "./NavItem";
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
@@ -13,8 +13,17 @@ const MENU_LIST = [
 ];
 
 export default function NavBar() {
-  const isOpen = useRef(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeIdx, setActiveIdx] = useState(-1);
+
+  function handleClick() {
+    try {
+      setIsOpen(!isOpen);
+      console.log("done");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <nav className=" flex items-center justify-between flex-wrap bg-teal-500 p-6 ">
@@ -27,14 +36,17 @@ export default function NavBar() {
       </Link>
       <div className="block lg:hidden">
         <button
-          onClick={() => isOpen.current = !isOpen.current}
-          className=" flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
-          type="button"
+          onClick={() => handleClick}
+          className=" flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white "
         >
-          <div className=" fill-current font-semibold ">${String(isOpen.current)}</div>
+          <div className=" fill-current font-semibold ">${String(isOpen)}</div>
         </button>
       </div>
-      <div className={" w-full flex-grow lg:flex lg:items-center lg:w-auto lg:text-center &{isOpen ? 'hidden' : 'block'} "}>
+      <div
+        className={
+          " w-full flex-grow lg:flex lg:items-center lg:w-auto lg:text-center &{isOpen ? 'hidden' : 'block'} "
+        }
+      >
         {MENU_LIST.map((menu, idx) => (
           <div
             className="text-sm lg:flex-grow"
