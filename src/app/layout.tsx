@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { NavBar } from "./NavBar";
+import { NavBar } from "../components/Navigation/NavBar";
 
 export const metadata = {
   title: "Create Next App",
