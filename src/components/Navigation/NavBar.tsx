@@ -25,7 +25,7 @@ export function NavBar() {
   }, []);
 
   if (windowComponent) {
-    return(
+    return (
       <div className=" flex items-center justify-between flex-wrap bg-teal-500 p-6 ">
         <Link href={"/"}>
           <div className=" flex items-center flex-shrink-0 text-white mr-6">
@@ -34,24 +34,20 @@ export function NavBar() {
             </h1>
           </div>
         </Link>
-          <div
-            className={
-              " flex-grow flex items-center w-auto text-center "
-            }
-          >
-            {MENU_LIST.map((menu, idx) => (
-              <div
-                className="text-sm flex-grow"
-                onClick={() => {
-                  setActiveIdx(idx);
-                }}
-                key={menu.text}
-              >
-                <NavItem active={activeIdx === idx} {...menu} />
-              </div>
-            ))}
-          </div>
-          
+        <div className={" flex-grow flex items-center w-auto text-center "}>
+          {MENU_LIST.map((menu, idx) => (
+            <div
+              className="text-sm flex-grow"
+              onClick={() => {
+                setActiveIdx(idx);
+              }}
+              key={menu.text}
+            >
+              <NavItem active={activeIdx === idx} {...menu} />
+            </div>
+          ))}
+        </div>
+
         <div className=" flex ">
           <button
             className={
@@ -61,12 +57,12 @@ export function NavBar() {
               window.open("", "Settings", windowFeatures);
               window.focus();
             }}
-            >
+          >
             <Settings />
           </button>
         </div>
       </div>
     );
   }
-  return (<></>);  
+  return <></>;
 }
