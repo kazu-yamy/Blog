@@ -1,19 +1,15 @@
-import fs from "fs";
+import { getAllPosts } from "app/api/slug";
 
-function getPostMetaData() {
-  const folder = "./src/content/";
-  const files = fs.readdirSync(folder);
-  const markdownPosts = files.filter((file) => file.endsWith(".md"));
-  const slugs = markdownPosts.map((file) => file.replace(".md", ""));
-  return slugs;
-}
-
-export default function BlogPage() {
-  const postMetaData = getPostMetaData();
-  const postPreViews: any = postMetaData.map((slug) => (
-    <div key={slug} className=" text-2xl font-bold ">
-      {slug}
+export default async function BlogPage() {
+  const allPosts = getAllPosts(["slug", "title", "date", "tags"]);
+  return (
+    <div>
+      {allPosts.map((post) => (
+        <a href={post.slug} key={post.slug} className={" flex flex-col rounded-xl bg-clip-border "}>
+          <h2 className=" text-2xl flex-1 p-5 font-bold ">{post.title}</h2>
+          <p className=" mb-3 opacity-60 ">{post.date}</p>
+        </a>
+      ))}
     </div>
-  ));
-  return <div>{postPreViews}</div>;
+  );
 }
