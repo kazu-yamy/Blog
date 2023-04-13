@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import NavItem from "./NavItem";
+import { NavItem } from "./NavItem";
 import { Settings } from "react-feather";
 
 const MENU_LIST = [
@@ -24,9 +24,8 @@ export function NavBar() {
     setWidth(window.innerWidth);
   }, []);
 
-  if (windowComponent) {
     return (
-      <div className=" flex items-center justify-between flex-wrap bg-teal-500 p-6 ">
+      <div className=" flex items-center justify-between flex-wrap bg-teal-500 p-2 ">
         <Link href={"/"}>
           <div className=" flex items-center flex-shrink-0 text-white mr-6">
             <h1 className=" font-semibold text-xl tracking-tight">
@@ -63,6 +62,4 @@ export function NavBar() {
         </div>
       </div>
     );
-  }
-  return <></>;
 }

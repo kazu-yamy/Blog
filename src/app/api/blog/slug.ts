@@ -9,15 +9,15 @@ type Post = {
   date: string;
 };
 
-const contentsdir = "./src/contents/";
+const contentsdir: string = "./src/contents/";
 
 export function getPostSlugs() {
   const dirs = fs.readdirSync(contentsdir, { withFileTypes: true });
   return dirs.filter((dir) => dir.isDirectory()).map(({ name }) => name);
 }
 
-export function getPostBySlugs(slug: string, fields: string[]) {
-  const fullPath = path.join(contentsdir, slug, "index.md");
+export function getPostBySlug(slug: string, fields: string[]) {
+  const fullPath = path.join(contentsdir, slug + "/", "index.md");
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
@@ -45,7 +45,7 @@ export function getPostBySlugs(slug: string, fields: string[]) {
 export function getAllPosts(fields: string[] = []) {
   const slug = getPostSlugs();
   const posts = slug
-    .map((slug) => getPostBySlugs(slug, fields))
+    .map((slug) => getPostBySlug(slug, fields))
     .sort((a, b) => (a.date > b.date ? -1 : 1));
   return posts;
 }
