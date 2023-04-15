@@ -3,13 +3,14 @@ import markdownToHtml from "app/api/blog/markdownToHtml";
 
 type Props = { params: { contents: string } };
 
-const Contents = ({ params: { contents } }: Props) => {
-  const post = getPostBySlug(contents, ["slug", "title", "date", "content"]);
-  console.log(contents);
+export default async function Contents ({ params: { contents } }: Props) {
+  const post = getPostBySlug(contents, [ "title", "date", "content" ]);
+  const mth = await markdownToHtml(post.content);
+  console.log(post);
   return (
-    <div>hello</div>
+    <div>
+      <p>{post.date}</p>
+      <div dangerouslySetInnerHTML={{__html: mth}}></div>
+    </div>
   );
 };
-
-
-export default Contents;

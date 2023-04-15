@@ -26,9 +26,9 @@ export function NavBar() {
 
     return (
       <div className=" flex items-center justify-between flex-wrap bg-teal-500 p-2 ">
-        <Link href={"/"}>
-          <div className=" flex items-center flex-shrink-0 text-white mr-6">
-            <h1 className=" font-semibold text-xl tracking-tight">
+        <Link href={"/"} className=" no-underline ">
+          <div className=" flex items-center text-white mr-6">
+            <h1 className=" font-semibold ">
               Sate Of MACCHA
             </h1>
           </div>
