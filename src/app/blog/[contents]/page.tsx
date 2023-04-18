@@ -7,6 +7,7 @@ export default async function Contents ({ params: { contents } }: Props) {
   const post = getPostBySlug(contents, [ "title", "date", "content" ]);
   const mth = await markdownToHtml(post.content);
   console.log(post);
+  console.log(mth);
   return (
     <div>
       <p>{post.date}</p>
