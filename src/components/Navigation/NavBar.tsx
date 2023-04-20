@@ -6,9 +6,8 @@ import { NavItem } from "./NavItem";
 import { Settings } from "react-feather";
 
 const MENU_LIST = [
-  { text: "Home", href: "/" },
-  { text: "About", href: "/about" },
-  { text: "Blog", href: "/blog" },
+  { text: "About", id: "#about" },
+  { text: "Blog", id: "#blog" },
 ];
 
 export function NavBar() {
@@ -26,7 +25,7 @@ export function NavBar() {
 
     return (
       <div className=" flex items-center justify-between flex-wrap bg-teal-500 p-2 ">
-        <Link href={"/"} className=" no-underline ">
+        <Link className=" no-underline " href="#home">
           <div className=" flex items-center text-white mr-6">
             <h1 className=" font-semibold ">
               Sate Of MACCHA
@@ -48,7 +47,7 @@ export function NavBar() {
         </div>
 
         <div className=" flex ">
-          <button
+          <div
             className={
               " flex items-center px-3 py-2 rounded text-teal-200 border-teal-400 hover:text-white hover:border-white "
             }
@@ -58,7 +57,7 @@ export function NavBar() {
             }}
           >
             <Settings />
-          </button>
+          </div>
         </div>
       </div>
     );

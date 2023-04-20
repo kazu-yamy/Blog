@@ -11,7 +11,7 @@ export default async function Contents ({ params: { contents } }: Props) {
   return (
     <div>
       <p className=" block ">{post.date}</p>
-      <div className=" m-32 h-auto w-auto items-center justify-center flex ">
+      <div className=" p-5 h-auto w-auto justify-items-center justify-center flex ">
         <div dangerouslySetInnerHTML={{__html: mth}}></div>
       </div>
     </div>
